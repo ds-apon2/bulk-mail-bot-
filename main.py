@@ -24,7 +24,7 @@ API_KEY = os.getenv("API_KEY")
 CHAT_ID = int(os.getenv("CHAT_ID"))
 OWNER_ID = int(os.getenv("OWNER_ID"))
 PRODUCT_ID = 11
-CHECK_INTERVAL = 30
+CHECK_INTERVAL = 10
 def is_owner(user_id):
     return user_id == OWNER_ID
 
