@@ -133,8 +133,8 @@ async def stock_monitor(app):
             print(stock)
             
             if stock:
-                count = stock["stock_count"]
-                name = stock["product_name"]
+                count = stock["stock"]
+                name = stock["name"]
 
                 current_state = count >= 5
 
