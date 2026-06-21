@@ -130,7 +130,8 @@ async def stock_monitor(app):
 
         try:
             stock = get_stock()
-
+            print(stock)
+            
             if stock:
                 count = stock["stock_count"]
                 name = stock["product_name"]
