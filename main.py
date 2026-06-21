@@ -34,6 +34,7 @@ def is_owner(user_id):
 
 MONITOR_ENABLED = False
 last_stock_state = False
+last_stock_count = None
 
 # =========================
 # API FUNCTIONS
@@ -133,12 +134,12 @@ async def stock_monitor(app):
             print(stock)
             
             if stock:
+                global last_stock_count
+
                 count = stock["stock"]
                 name = stock["name"]
 
-                current_state = count >= 5
-
-                if current_state and not last_stock_state:
+                if count >= 5 and count != last_stock_count:
 
                     keyboard = InlineKeyboardMarkup([
                         [
@@ -152,7 +153,7 @@ async def stock_monitor(app):
                     await app.bot.send_message(
                         chat_id=CHAT_ID,
                         text=(
-                            f"🚀 Stock Available!\n\n"
+                            f"🚀 Stock Updated!\n\n"
                             f"Product: {name}\n"
                             f"Product ID: {PRODUCT_ID}\n"
                             f"Stock: {count}"
@@ -160,7 +161,7 @@ async def stock_monitor(app):
                         reply_markup=keyboard
                     )
 
-                last_stock_state = current_state
+                last_stock_count = count
 
         except Exception as e:
             print("Stock Error:", e)
